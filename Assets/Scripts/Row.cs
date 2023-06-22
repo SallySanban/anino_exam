@@ -10,13 +10,16 @@ public class Row : MonoBehaviour
     public bool rowStopped;
     public string firstStoppedSlot, secondStoppedSlot, thirdStoppedSlot;
 
+    //array of y values that indicate correct position of the reels
     public float[] yValues = new float[]{-13.5742f, -11.7f, -9.82f, -7.98f, -6.04f, -4.2f, -2.32f, -0.39f, 1.45f, 3.35f, 5.23f, 7.11f, 9.01f, 10.87f, 12.78f, 14.66f, 16.54f};
     
+    //starts rotating once the spin button is pressed
     void Start(){
         rowStopped = true;
         GameControl.SpinPressed += StartRotating;
     }
 
+    //calls the rotate coroutine
     private void StartRotating(){
         firstStoppedSlot = "";
         secondStoppedSlot = "";
@@ -24,20 +27,25 @@ public class Row : MonoBehaviour
         StartCoroutine("Rotate");
     }
 
+    //spins the reels
     private IEnumerator Rotate(){
         rowStopped = false;
         timeInterval = 0.025f;
         int index = 0;
 
+        //spins 30 times with a speed of timeInterval
         for(int i=0; i<30; i++){
+            //if the y position is before the first correct position, change the position to the last position (which is the first position repeated)
             if(transform.position.y <= -13.5742f){
                 transform.position = new Vector2(transform.position.x, 16.54f);
             }
 
+            //changes the y value of the reels by the positions in the array
             transform.position = new Vector2(transform.position.x, yValues[index]);
 
             index++;
 
+            //error checking for when index of position array is over the number of positions
             if(index > 16){
                 index = 0;
             }
@@ -47,6 +55,7 @@ public class Row : MonoBehaviour
 
         index = 0;
 
+        //random value for slowing down each reel
         randomValue = Random.Range(60,100);
 
         switch(randomValue % 3){
@@ -58,13 +67,16 @@ public class Row : MonoBehaviour
                 break;
         }
 
+
         for(int i=0; i < randomValue; i++){
+            //for spinning the reel (changing y)
             if(transform.position.y <= -13.5742f){
                 transform.position = new Vector2(transform.position.x, 16.54f);
             }
 
             transform.position = new Vector2(transform.position.x, yValues[index]);
 
+            //changes the speed
             if(i > Mathf.RoundToInt(randomValue * 0.25f)){
                 timeInterval = 0.05f;
             }
@@ -82,7 +94,8 @@ public class Row : MonoBehaviour
             }
 
             index++;
-
+            
+            //error checking for when index of position array is over the number of positions
             if(index > 16){
                 index = 0;
             }
@@ -90,6 +103,7 @@ public class Row : MonoBehaviour
             yield return new WaitForSeconds(timeInterval);
         }
 
+        //assigns the firstStoppedSlot (1st row), secondStoppedSlot (2nd row), thirdStoppedSlot (3rd row) with the values of the stopped slots
         if(transform.position.y == -13.5742f){
             firstStoppedSlot = "One";
             secondStoppedSlot = "Two";
@@ -176,10 +190,12 @@ public class Row : MonoBehaviour
             thirdStoppedSlot = "Three";
         }
 
+        //triggers showing of prize results
         GameControl.showResults = true;
         rowStopped = true;
     }
 
+    //destroys game object
     private void OnDestroy(){
         GameControl.SpinPressed -= StartRotating;
     }

@@ -35,6 +35,11 @@ public class GameControl : MonoBehaviour
                 StartCoroutine("Spin");
 
                 int newCoins = int.Parse(coinsText.text) - int.Parse(betText.text);
+
+                if(newCoins < 0){
+                    newCoins = 0;
+                }
+                
                 coinsText.text = newCoins.ToString();
             }
         }
@@ -95,7 +100,7 @@ public class GameControl : MonoBehaviour
 
             index++;
         }
-        
+
         showResults = false;
     }
 }

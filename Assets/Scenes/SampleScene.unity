@@ -1068,6 +1068,24 @@ MonoBehaviour:
   firstStoppedSlot: 
   secondStoppedSlot: 
   thirdStoppedSlot: 
+  yValues:
+  - -13.5742
+  - -11.7
+  - -9.82
+  - -7.98
+  - -6.04
+  - -4.2
+  - -2.32
+  - -0.39
+  - 1.45
+  - 3.35
+  - 5.23
+  - 7.11
+  - 9.01
+  - 10.87
+  - 12.78
+  - 14.66
+  - 16.54
 --- !u!212 &769311195
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1169,6 +1187,24 @@ MonoBehaviour:
   firstStoppedSlot: 
   secondStoppedSlot: 
   thirdStoppedSlot: 
+  yValues:
+  - -13.5742
+  - -11.7
+  - -9.82
+  - -7.98
+  - -6.04
+  - -4.2
+  - -2.32
+  - -0.39
+  - 1.45
+  - 3.35
+  - 5.23
+  - 7.11
+  - 9.01
+  - 10.87
+  - 12.78
+  - 14.66
+  - 16.54
 --- !u!212 &877602221
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1405,6 +1441,24 @@ MonoBehaviour:
   firstStoppedSlot: 
   secondStoppedSlot: 
   thirdStoppedSlot: 
+  yValues:
+  - -13.5742
+  - -11.7
+  - -9.82
+  - -7.98
+  - -6.04
+  - -4.2
+  - -2.32
+  - -0.39
+  - 1.45
+  - 3.35
+  - 5.23
+  - 7.11
+  - 9.01
+  - 10.87
+  - 12.78
+  - 14.66
+  - 16.54
 --- !u!212 &929418534
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1614,7 +1668,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1000
+  m_text: 100
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1725,6 +1779,24 @@ MonoBehaviour:
   firstStoppedSlot: 
   secondStoppedSlot: 
   thirdStoppedSlot: 
+  yValues:
+  - -13.5742
+  - -11.7
+  - -9.82
+  - -7.98
+  - -6.04
+  - -4.2
+  - -2.32
+  - -0.39
+  - 1.45
+  - 3.35
+  - 5.23
+  - 7.11
+  - 9.01
+  - 10.87
+  - 12.78
+  - 14.66
+  - 16.54
 --- !u!212 &1254848508
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2099,6 +2171,24 @@ MonoBehaviour:
   firstStoppedSlot: 
   secondStoppedSlot: 
   thirdStoppedSlot: 
+  yValues:
+  - -13.5742
+  - -11.7
+  - -9.82
+  - -7.98
+  - -6.04
+  - -4.2
+  - -2.32
+  - -0.39
+  - 1.45
+  - 3.35
+  - 5.23
+  - 7.11
+  - 9.01
+  - 10.87
+  - 12.78
+  - 14.66
+  - 16.54
 --- !u!212 &1504878724
 SpriteRenderer:
   m_ObjectHideFlags: 0

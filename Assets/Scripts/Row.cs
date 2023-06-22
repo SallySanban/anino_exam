@@ -11,7 +11,7 @@ public class Row : MonoBehaviour
     public string firstStoppedSlot, secondStoppedSlot, thirdStoppedSlot;
 
     public float[] yValues = new float[]{-13.5742f, -11.7f, -9.82f, -7.98f, -6.04f, -4.2f, -2.32f, -0.39f, 1.45f, 3.35f, 5.23f, 7.11f, 9.01f, 10.87f, 12.78f, 14.66f, 16.54f};
-
+    
     void Start(){
         rowStopped = true;
         GameControl.SpinPressed += StartRotating;
@@ -27,7 +27,6 @@ public class Row : MonoBehaviour
     private IEnumerator Rotate(){
         rowStopped = false;
         timeInterval = 0.025f;
-
         int index = 0;
 
         for(int i=0; i<30; i++){
@@ -35,7 +34,8 @@ public class Row : MonoBehaviour
                 transform.position = new Vector2(transform.position.x, 16.54f);
             }
 
-            transform.position = new Vector2(transform.position.x, transform.position.y - 1);
+            transform.position = new Vector2(transform.position.x, yValues[index]);
+
             index++;
 
             if(index > 16){
@@ -45,7 +45,7 @@ public class Row : MonoBehaviour
             yield return new WaitForSeconds(timeInterval);
         }
 
-        
+        index = 0;
 
         randomValue = Random.Range(60,100);
 
@@ -57,15 +57,13 @@ public class Row : MonoBehaviour
                 randomValue += 1;
                 break;
         }
-        
-        index = 0;
 
-        for(int i=0; i < 10; i++){
+        for(int i=0; i < randomValue; i++){
             if(transform.position.y <= -13.5742f){
                 transform.position = new Vector2(transform.position.x, 16.54f);
             }
 
-            transform.position = new Vector2(transform.position.x, transform.position.y - 1);
+            transform.position = new Vector2(transform.position.x, yValues[index]);
 
             if(i > Mathf.RoundToInt(randomValue * 0.25f)){
                 timeInterval = 0.05f;
@@ -178,6 +176,7 @@ public class Row : MonoBehaviour
             thirdStoppedSlot = "Three";
         }
 
+        GameControl.showResults = true;
         rowStopped = true;
     }
 

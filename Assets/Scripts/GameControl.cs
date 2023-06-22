@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.Linq;
 using TMPro;
 
 public class GameControl : MonoBehaviour
 {
     public static event Action SpinPressed = delegate { };
+    public static bool showResults = false;
 
     [SerializeField]
     private TextMeshProUGUI coinsText;
@@ -21,20 +23,13 @@ public class GameControl : MonoBehaviour
     [SerializeField]
     private Row[] rows;
 
-    private bool resultsChecked = false;
-
     void Update(){
-        if(!rows[0].rowStopped || !rows[1].rowStopped || !rows[2].rowStopped || !rows[3].rowStopped || !rows[4].rowStopped){
-            resultsChecked = false;
-        }
-
-        if(rows[0].rowStopped && rows[1].rowStopped && rows[2].rowStopped && rows[3].rowStopped && rows[4].rowStopped && !resultsChecked){
+        if(rows[0].rowStopped && rows[1].rowStopped && rows[2].rowStopped && rows[3].rowStopped && rows[4].rowStopped && showResults){
             CheckResults();
         }
     }
 
     private void OnMouseDown(){
-        print("PRESSED");
         if(rows[0].rowStopped && rows[1].rowStopped && rows[2].rowStopped && rows[3].rowStopped && rows[4].rowStopped){
             if(int.Parse(coinsText.text) >= int.Parse(betText.text) && int.Parse(betText.text) != 0){
                 StartCoroutine("Spin");
@@ -52,46 +47,51 @@ public class GameControl : MonoBehaviour
     }
 
     private void CheckResults(){
-        // private string[] firstSlotValues = new string[];
-        // private string[] secondSlotValues = new string[];
-        // private string[] thirdSlotValues = new string[];
+        string[] firstSlotValues = new string[5];
+        string[] secondSlotValues = new string[5];
+        string[] thirdSlotValues = new string[5];
+        
+        int newWin;
+        int count;
+
+        for(int i=0; i<5; i++){
+            firstSlotValues.Append(rows[0].firstStoppedSlot).ToArray();
+            secondSlotValues.Append(rows[1].secondStoppedSlot).ToArray();
+            thirdSlotValues.Append(rows[2].thirdStoppedSlot).ToArray();
+        }
+
+        for(int i=0; i<5; i++){
+            count = firstSlotValues.Count(c => c == firstSlotValues[i]);
+
+            print(firstSlotValues[i] + " " + count);
+
+            if(count >= 2 && count <= 5){
+                newWin = int.Parse(winText.text) + 1;
+
+                winText.text = newWin.ToString();
+            }
+        }
 
         // for(int i=0; i<5; i++){
-        //     firstSlotValues.Append(rows[0].firstSlotValues).ToArray(firstSlotValues);
-        //     secondSlotValues.Append(rows[1].secondSlotValues).ToArray(secondSlotValues);
-        //     thirdSlotValues.Append(rows[2].thirdSlotValues).ToArray(thirdSlotValues);
-        // }
-
-        // for(i=0; i<5; i++){
-        //     count = firstSlotValues.Count(c => c == firstSlotValues[i]);
-
-        //     if(count >= 3 && count <= 5){
-        //         int newWin = int.Parse(winText.text) + 1;
-
-        //         winText.text = newWin.ToString();
-        //     }
-        // }
-
-        // for(i=0; i<5; i++){
         //     count = secondSlotValues.Count(c => c == secondSlotValues[i]);
 
-        //     if(count >= 3 && count <= 5){
+        //     if(count >= 2 && count <= 5){
         //         newWin = int.Parse(winText.text) + 1;
 
         //         winText.text = newWin.ToString();
         //     }
         // }
 
-        // for(i=0; i<5; i++){
+        // for(int i=0; i<5; i++){
         //     count = thirdSlotValues.Count(c => c == thirdSlotValues[i]);
 
-        //     if(count >= 3 && count <= 5){
+        //     if(count >= 2 && count <= 5){
         //         newWin = int.Parse(winText.text) + 1;
 
         //         winText.text = newWin.ToString();
         //     }
         // }
 
-        resultsChecked = true;
+        showResults = false;
     }
 }

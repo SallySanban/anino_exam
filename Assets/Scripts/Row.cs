@@ -35,7 +35,7 @@ public class Row : MonoBehaviour
                 transform.position = new Vector2(transform.position.x, 16.54f);
             }
 
-            transform.position = new Vector2(transform.position.x, yValues[index]);
+            transform.position = new Vector2(transform.position.x, transform.position.y - 1);
             index++;
 
             if(index > 16){
@@ -47,18 +47,18 @@ public class Row : MonoBehaviour
 
         
 
-        // randomValue = Random.Range(60,100);
+        randomValue = Random.Range(60,100);
 
-        // switch(randomValue % 3){
-        //     case 1:
-        //         randomValue += 2;
-        //         break;
-        //     case 2:
-        //         randomValue += 1;
-        //         break;
-        // }
+        switch(randomValue % 3){
+            case 1:
+                randomValue += 2;
+                break;
+            case 2:
+                randomValue += 1;
+                break;
+        }
         
-        // index = 0;
+        index = 0;
 
         for(int i=0; i < 10; i++){
             if(transform.position.y <= -13.5742f){
@@ -67,28 +67,27 @@ public class Row : MonoBehaviour
 
             transform.position = new Vector2(transform.position.x, transform.position.y - 1);
 
-            timeInterval = 0.2f;
-            // if(i > Mathf.RoundToInt(randomValue * 0.25f)){
-            //     timeInterval = 0.05f;
-            // }
+            if(i > Mathf.RoundToInt(randomValue * 0.25f)){
+                timeInterval = 0.05f;
+            }
 
-            // if(i > Mathf.RoundToInt(randomValue * 0.5f)){
-            //     timeInterval = 0.1f;
-            // }
+            if(i > Mathf.RoundToInt(randomValue * 0.5f)){
+                timeInterval = 0.1f;
+            }
 
-            // if(i > Mathf.RoundToInt(randomValue * 0.75f)){
-            //     timeInterval = 0.15f;
-            // }
+            if(i > Mathf.RoundToInt(randomValue * 0.75f)){
+                timeInterval = 0.15f;
+            }
 
-            // if(i > Mathf.RoundToInt(randomValue * 0.95f)){
-            //     timeInterval = 0.2f;
-            // }
+            if(i > Mathf.RoundToInt(randomValue * 0.95f)){
+                timeInterval = 0.2f;
+            }
 
-            // index++;
+            index++;
 
-            // if(index > 16){
-            //     index = 0;
-            // }
+            if(index > 16){
+                index = 0;
+            }
 
             yield return new WaitForSeconds(timeInterval);
         }

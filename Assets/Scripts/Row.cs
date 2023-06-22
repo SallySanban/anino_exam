@@ -35,7 +35,7 @@ public class Row : MonoBehaviour
                 transform.position = new Vector2(transform.position.x, 16.54f);
             }
 
-            transform.position = new Vector2(transform.position.x, transform.position.y - 1);
+            transform.position = new Vector2(transform.position.x, yValues[index]);
             index++;
 
             if(index > 16){

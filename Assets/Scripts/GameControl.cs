@@ -47,51 +47,55 @@ public class GameControl : MonoBehaviour
     }
 
     private void CheckResults(){
-        string[] firstSlotValues = new string[5];
-        string[] secondSlotValues = new string[5];
-        string[] thirdSlotValues = new string[5];
-        
-        int newWin;
-        int count;
+        int index = 0;
+        while(index < 3){
+            List<string> slotValues = new List<string>();
 
-        for(int i=0; i<5; i++){
-            firstSlotValues.Append(rows[0].firstStoppedSlot).ToArray();
-            secondSlotValues.Append(rows[1].secondStoppedSlot).ToArray();
-            thirdSlotValues.Append(rows[2].thirdStoppedSlot).ToArray();
-        }
+            int newWin;
+            int count;
 
-        for(int i=0; i<5; i++){
-            count = firstSlotValues.Count(c => c == firstSlotValues[i]);
-
-            print(firstSlotValues[i] + " " + count);
-
-            if(count >= 2 && count <= 5){
-                newWin = int.Parse(winText.text) + 1;
-
-                winText.text = newWin.ToString();
+            for(int i=0; i<5; i++){
+                if(index == 0){
+                    slotValues.Add(rows[i].firstStoppedSlot);
+                }
+                else if(index == 1){
+                    slotValues.Add(rows[i].secondStoppedSlot);
+                }
+                else if(index == 2){
+                    slotValues.Add(rows[i].thirdStoppedSlot);
+                }
             }
+
+            List <string> distinctSlotValues = slotValues.Distinct().ToList();
+
+            IDictionary<string, int> countSlot = new Dictionary<string, int>();
+
+            for(int i=0; i<distinctSlotValues.Count; i++){
+                count = slotValues.Where(x => x != null && x.Equals(distinctSlotValues[i])).Count();
+                countSlot.Add(distinctSlotValues[i], count);
+            }
+
+            foreach(KeyValuePair<string, int> kvp in countSlot){
+                if(countSlot[kvp.Key] == 3){
+                    newWin = int.Parse(winText.text) + 1;
+
+                    winText.text = newWin.ToString();
+                }
+                else if(countSlot[kvp.Key] == 4){
+                    newWin = int.Parse(winText.text) + 5;
+
+                    winText.text = newWin.ToString();
+                }
+                else if(countSlot[kvp.Key] == 5){
+                    newWin = int.Parse(winText.text) + 10;
+
+                    winText.text = newWin.ToString();
+                }
+            }
+
+            index++;
         }
-
-        // for(int i=0; i<5; i++){
-        //     count = secondSlotValues.Count(c => c == secondSlotValues[i]);
-
-        //     if(count >= 2 && count <= 5){
-        //         newWin = int.Parse(winText.text) + 1;
-
-        //         winText.text = newWin.ToString();
-        //     }
-        // }
-
-        // for(int i=0; i<5; i++){
-        //     count = thirdSlotValues.Count(c => c == thirdSlotValues[i]);
-
-        //     if(count >= 2 && count <= 5){
-        //         newWin = int.Parse(winText.text) + 1;
-
-        //         winText.text = newWin.ToString();
-        //     }
-        // }
-
+        
         showResults = false;
     }
 }

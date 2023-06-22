@@ -11,7 +11,7 @@ public class AddBet : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI betText;
 
-    private int lines = 20;
+    private int lines = 3;
 
     private void OnMouseDown(){
         number = number + 1;
